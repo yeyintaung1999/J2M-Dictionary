@@ -8,7 +8,7 @@
 import UIKit
 import SQLite
 
-var table : String = "dtb_n1"
+var table : String = "dtb_n5"
 var level : String = "N5"
 
 class ViewController: UIViewController {
