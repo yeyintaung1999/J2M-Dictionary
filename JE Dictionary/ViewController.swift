@@ -8,72 +8,59 @@
 import UIKit
 import SQLite
 
-var table : String = "dtb_n5"
-var level : String = "N5"
+var table = "dtb_n5"
+var level = "N5"
 
 class ViewController: UIViewController {
-
-//    var database: Connection!
     
     @IBOutlet weak var tfSearch: UITextField!
     @IBOutlet weak var tvResults: UITableView!
     
     var results: [ResultVO] = []
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.title = "\(level)"
+    var dbtable: String?{
+        didSet {
+            if let dbtable = dbtable {
+                table = dbtable
+            }
+        }
     }
+    var dblevel: String?{
+        didSet {
+            if let dblevel = dblevel{
+                level = dblevel
+            }
+        }
+    }
+
+    var manager : DBManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        manager = DBManager(table: table, level: level)
         results = []
-        
-        
-        
         fetchInitialResults()
         tfSearch.delegate = self
         setUpTableView()
-        
         navigationItem.backButtonTitle = ""
+        navigationItem.hidesBackButton = true
+        self.title = "\(level)"
+        
     }
-
+    
     @IBAction func didTapSearch(_ sender: UIButton) {
-        
         self.results = []
-        let key = tfSearch.text!
-        
-        let query = "SELECT * FROM \(table) WHERE romaji = '\(key)'"
-        
-        for item in try! database.prepare(query){
-            
-            let vo = ResultVO(
-                kana: item[3] as! String,
-                romaji: item[2] as! String,
-                kanji: item[4] as! String,
-                meaning_mm: item[5] as! String
-            )
-            self.results.append(vo)
-        }
+        let data = manager.fetchResults(for: tfSearch.text!)
+        results.append(contentsOf: data)
         self.tvResults.reloadData()
         tfSearch.endEditing(true)
     }
     
     func fetchInitialResults(){
         results = []
-        let query = "SELECT * FROM \(table)"
-        
-        for item in try! database.prepare(query){
-            let vo = ResultVO(
-                kana: item[3] as! String,
-                romaji: item[2] as! String,
-                kanji: item[4] as! String,
-                meaning_mm: item[5] as! String
-            )
-            self.results.append(vo)
-        }
-        
-        
+        let data = manager.fetchInitialResults()
+        self.results.append(contentsOf: data)
+        tvResults.reloadData()
     }
     
     func setUpTableView(){
@@ -83,10 +70,15 @@ class ViewController: UIViewController {
     }
     
     
+    @IBAction func onTapLvl(_ sender: Any) {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: String(describing: LevelViewController.self)) as! LevelViewController
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
-
+//MARK: - TEXTFIELD DELEGATE
 extension ViewController: UITextFieldDelegate {
-
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         tfSearch.endEditing(true)
         return true
@@ -94,55 +86,24 @@ extension ViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.results = []
-        let key = tfSearch.text!
-        
-        let query = "SELECT * FROM \(table) WHERE romaji = '\(key)'"
-        
-        for item in try! database.prepare(query){
-            
-            let vo = ResultVO(
-                kana: item[3] as! String,
-                romaji: item[2] as! String,
-                kanji: item[4] as! String,
-                meaning_mm: item[5] as! String
-            )
-            self.results.append(vo)
-        }
-        
+        let data = manager.fetchResults(for: tfSearch.text!)
+        self.results.append(contentsOf: data)
         self.tvResults.reloadData()
-        
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        
         self.results = []
-        let key = tfSearch.text!
-        
-        let query = "SELECT * FROM \(table) WHERE romaji LIKE '%\(key)%'"
-        
-        for item in try! database.prepare(query){
-            
-            let vo = ResultVO(
-                kana: item[3] as! String,
-                romaji: item[2] as! String,
-                kanji: item[4] as! String,
-                meaning_mm: item[5] as! String
-            )
-            self.results.append(vo)
-        }
-        self.tvResults.reloadData()
-        
+        let data = manager.fetchResults(for: tfSearch.text!)
+        self.results.append(contentsOf: data)
         if tfSearch.text! == "" {
             fetchInitialResults()
-            tvResults.reloadData()
         }
-      
+        self.tvResults.reloadData()
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         if tfSearch.text == nil || tfSearch.text == "" {
             tfSearch.placeholder = "Type Something"
-            
             return false
         }else{
             return true
@@ -151,6 +112,7 @@ extension ViewController: UITextFieldDelegate {
     
 }
 
+//MARK: - TABLEVIEW DATASOURCE & DELEGATE
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return results.count
@@ -165,8 +127,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "vcresultdetail") as! ResultDetailViewController
         vc.vo = results[indexPath.row]
-        
-        
         navigationController?.pushViewController(vc, animated: true)
         tvResults.deselectRow(at: indexPath, animated: true)
     }

@@ -13,9 +13,10 @@
 		671E492D29ED8A2B0099DC61 /* ResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671E492B29ED8A2B0099DC61 /* ResultTableViewCell.swift */; };
 		671E492E29ED8A2B0099DC61 /* ResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 671E492C29ED8A2B0099DC61 /* ResultTableViewCell.xib */; };
 		671E493029ED91AE0099DC61 /* ResultDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671E492F29ED91AE0099DC61 /* ResultDetailViewController.swift */; };
-		671E493429EE47A50099DC61 /* SideMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671E493329EE47A50099DC61 /* SideMenuTableViewController.swift */; };
 		671E493729EE48700099DC61 /* LevelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671E493529EE48700099DC61 /* LevelTableViewCell.swift */; };
 		671E493829EE48700099DC61 /* LevelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 671E493629EE48700099DC61 /* LevelTableViewCell.xib */; };
+		671E493B29EE6C3D0099DC61 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671E493A29EE6C3D0099DC61 /* DBManager.swift */; };
+		671E493F29EE78D30099DC61 /* LevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671E493E29EE78D30099DC61 /* LevelViewController.swift */; };
 		67BA609529E53016009A2D33 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BA609429E53016009A2D33 /* AppDelegate.swift */; };
 		67BA609729E53016009A2D33 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BA609629E53016009A2D33 /* SceneDelegate.swift */; };
 		67BA609929E53016009A2D33 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BA609829E53016009A2D33 /* ViewController.swift */; };
@@ -30,9 +31,10 @@
 		671E492B29ED8A2B0099DC61 /* ResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTableViewCell.swift; sourceTree = "<group>"; };
 		671E492C29ED8A2B0099DC61 /* ResultTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultTableViewCell.xib; sourceTree = "<group>"; };
 		671E492F29ED91AE0099DC61 /* ResultDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDetailViewController.swift; sourceTree = "<group>"; };
-		671E493329EE47A50099DC61 /* SideMenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewController.swift; sourceTree = "<group>"; };
 		671E493529EE48700099DC61 /* LevelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelTableViewCell.swift; sourceTree = "<group>"; };
 		671E493629EE48700099DC61 /* LevelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LevelTableViewCell.xib; sourceTree = "<group>"; };
+		671E493A29EE6C3D0099DC61 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
+		671E493E29EE78D30099DC61 /* LevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelViewController.swift; sourceTree = "<group>"; };
 		67BA609129E53016009A2D33 /* JE Dictionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "JE Dictionary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		67BA609429E53016009A2D33 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67BA609629E53016009A2D33 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +95,14 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		671E493929EE6C300099DC61 /* DBManager */ = {
+			isa = PBXGroup;
+			children = (
+				671E493A29EE6C3D0099DC61 /* DBManager.swift */,
+			);
+			path = DBManager;
+			sourceTree = "<group>";
+		};
 		67BA608829E53016009A2D33 = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +124,7 @@
 		67BA609329E53016009A2D33 /* JE Dictionary */ = {
 			isa = PBXGroup;
 			children = (
+				671E493929EE6C300099DC61 /* DBManager */,
 				671E492A29ED8A0C0099DC61 /* Cells */,
 				671E492229E5D28C0099DC61 /* Model */,
 				671E491F29E5CEAF0099DC61 /* Database */,
@@ -125,7 +136,7 @@
 				67BA609F29E53018009A2D33 /* LaunchScreen.storyboard */,
 				67BA60A229E53018009A2D33 /* Info.plist */,
 				671E492F29ED91AE0099DC61 /* ResultDetailViewController.swift */,
-				671E493329EE47A50099DC61 /* SideMenuTableViewController.swift */,
+				671E493E29EE78D30099DC61 /* LevelViewController.swift */,
 			);
 			path = "JE Dictionary";
 			sourceTree = "<group>";
@@ -260,11 +271,12 @@
 				671E493029ED91AE0099DC61 /* ResultDetailViewController.swift in Sources */,
 				67BA609929E53016009A2D33 /* ViewController.swift in Sources */,
 				671E492929ED89B20099DC61 /* ResultVO.swift in Sources */,
+				671E493F29EE78D30099DC61 /* LevelViewController.swift in Sources */,
 				67BA609529E53016009A2D33 /* AppDelegate.swift in Sources */,
+				671E493B29EE6C3D0099DC61 /* DBManager.swift in Sources */,
 				671E492D29ED8A2B0099DC61 /* ResultTableViewCell.swift in Sources */,
 				67BA609729E53016009A2D33 /* SceneDelegate.swift in Sources */,
 				671E493729EE48700099DC61 /* LevelTableViewCell.swift in Sources */,
-				671E493429EE47A50099DC61 /* SideMenuTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
