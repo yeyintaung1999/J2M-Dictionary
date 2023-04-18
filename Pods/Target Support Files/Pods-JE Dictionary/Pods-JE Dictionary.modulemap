@@ -1,0 +1,6 @@
+framework module Pods_JE_Dictionary {
+  umbrella header "Pods-JE Dictionary-umbrella.h"
+
+  export *
+  module * { export * }
+}
