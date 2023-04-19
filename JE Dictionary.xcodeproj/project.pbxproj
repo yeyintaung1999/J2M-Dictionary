@@ -16,13 +16,16 @@
 		671E493729EE48700099DC61 /* LevelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671E493529EE48700099DC61 /* LevelTableViewCell.swift */; };
 		671E493829EE48700099DC61 /* LevelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 671E493629EE48700099DC61 /* LevelTableViewCell.xib */; };
 		671E493B29EE6C3D0099DC61 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671E493A29EE6C3D0099DC61 /* DBManager.swift */; };
-		671E493F29EE78D30099DC61 /* LevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671E493E29EE78D30099DC61 /* LevelViewController.swift */; };
+		671E494129EE94750099DC61 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671E494029EE94750099DC61 /* SettingViewController.swift */; };
 		67BA609529E53016009A2D33 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BA609429E53016009A2D33 /* AppDelegate.swift */; };
 		67BA609729E53016009A2D33 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BA609629E53016009A2D33 /* SceneDelegate.swift */; };
 		67BA609929E53016009A2D33 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BA609829E53016009A2D33 /* ViewController.swift */; };
 		67BA609C29E53016009A2D33 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67BA609A29E53016009A2D33 /* Main.storyboard */; };
 		67BA609E29E53018009A2D33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67BA609D29E53018009A2D33 /* Assets.xcassets */; };
 		67BA60A129E53018009A2D33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67BA609F29E53018009A2D33 /* LaunchScreen.storyboard */; };
+		67DB32BE29EFA96900F935C8 /* LevelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DB32BC29EFA96900F935C8 /* LevelCollectionViewCell.swift */; };
+		67DB32BF29EFA96900F935C8 /* LevelCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67DB32BD29EFA96900F935C8 /* LevelCollectionViewCell.xib */; };
+		67DB32C129EFABFD00F935C8 /* LevelVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DB32C029EFABFD00F935C8 /* LevelVO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +37,7 @@
 		671E493529EE48700099DC61 /* LevelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelTableViewCell.swift; sourceTree = "<group>"; };
 		671E493629EE48700099DC61 /* LevelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LevelTableViewCell.xib; sourceTree = "<group>"; };
 		671E493A29EE6C3D0099DC61 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
-		671E493E29EE78D30099DC61 /* LevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelViewController.swift; sourceTree = "<group>"; };
+		671E494029EE94750099DC61 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		67BA609129E53016009A2D33 /* JE Dictionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "JE Dictionary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		67BA609429E53016009A2D33 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67BA609629E53016009A2D33 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +46,9 @@
 		67BA609D29E53018009A2D33 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		67BA60A029E53018009A2D33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		67BA60A229E53018009A2D33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		67DB32BC29EFA96900F935C8 /* LevelCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelCollectionViewCell.swift; sourceTree = "<group>"; };
+		67DB32BD29EFA96900F935C8 /* LevelCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LevelCollectionViewCell.xib; sourceTree = "<group>"; };
+		67DB32C029EFABFD00F935C8 /* LevelVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelVO.swift; sourceTree = "<group>"; };
 		ABC03FC2E7103C5E2685EE54 /* Pods-JE Dictionary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JE Dictionary.release.xcconfig"; path = "Target Support Files/Pods-JE Dictionary/Pods-JE Dictionary.release.xcconfig"; sourceTree = "<group>"; };
 		ABF9ED429F27555B37AA7AD0 /* Pods-JE Dictionary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JE Dictionary.debug.xcconfig"; path = "Target Support Files/Pods-JE Dictionary/Pods-JE Dictionary.debug.xcconfig"; sourceTree = "<group>"; };
 		C9487523504A516744ACCA34 /* Pods_JE_Dictionary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JE_Dictionary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				671E492829ED89B20099DC61 /* ResultVO.swift */,
+				67DB32C029EFABFD00F935C8 /* LevelVO.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -91,6 +98,8 @@
 				671E492C29ED8A2B0099DC61 /* ResultTableViewCell.xib */,
 				671E493529EE48700099DC61 /* LevelTableViewCell.swift */,
 				671E493629EE48700099DC61 /* LevelTableViewCell.xib */,
+				67DB32BC29EFA96900F935C8 /* LevelCollectionViewCell.swift */,
+				67DB32BD29EFA96900F935C8 /* LevelCollectionViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -136,7 +145,7 @@
 				67BA609F29E53018009A2D33 /* LaunchScreen.storyboard */,
 				67BA60A229E53018009A2D33 /* Info.plist */,
 				671E492F29ED91AE0099DC61 /* ResultDetailViewController.swift */,
-				671E493E29EE78D30099DC61 /* LevelViewController.swift */,
+				671E494029EE94750099DC61 /* SettingViewController.swift */,
 			);
 			path = "JE Dictionary";
 			sourceTree = "<group>";
@@ -215,6 +224,7 @@
 				67BA609E29E53018009A2D33 /* Assets.xcassets in Resources */,
 				67BA609C29E53016009A2D33 /* Main.storyboard in Resources */,
 				671E493829EE48700099DC61 /* LevelTableViewCell.xib in Resources */,
+				67DB32BF29EFA96900F935C8 /* LevelCollectionViewCell.xib in Resources */,
 				671E492129E5CEC60099DC61 /* sqlite.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,12 +281,14 @@
 				671E493029ED91AE0099DC61 /* ResultDetailViewController.swift in Sources */,
 				67BA609929E53016009A2D33 /* ViewController.swift in Sources */,
 				671E492929ED89B20099DC61 /* ResultVO.swift in Sources */,
-				671E493F29EE78D30099DC61 /* LevelViewController.swift in Sources */,
+				67DB32BE29EFA96900F935C8 /* LevelCollectionViewCell.swift in Sources */,
 				67BA609529E53016009A2D33 /* AppDelegate.swift in Sources */,
+				671E494129EE94750099DC61 /* SettingViewController.swift in Sources */,
 				671E493B29EE6C3D0099DC61 /* DBManager.swift in Sources */,
 				671E492D29ED8A2B0099DC61 /* ResultTableViewCell.swift in Sources */,
 				67BA609729E53016009A2D33 /* SceneDelegate.swift in Sources */,
 				671E493729EE48700099DC61 /* LevelTableViewCell.swift in Sources */,
+				67DB32C129EFABFD00F935C8 /* LevelVO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

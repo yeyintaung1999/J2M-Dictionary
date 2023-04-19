@@ -11,8 +11,6 @@ var database: Connection!
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         let fileUrl = Bundle.main.url(forResource: "sqlite", withExtension: ".db")!

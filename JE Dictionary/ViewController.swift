@@ -7,72 +7,97 @@
 
 import UIKit
 import SQLite
-
-var table = "dtb_n5"
-var level = "N5"
+import RxSwift
 
 class ViewController: UIViewController {
     
     @IBOutlet weak var tfSearch: UITextField!
     @IBOutlet weak var tvResults: UITableView!
+    @IBOutlet weak var cvLevel: UICollectionView!
     
     var results: [ResultVO] = []
     
-    var dbtable: String?{
-        didSet {
-            if let dbtable = dbtable {
-                table = dbtable
-            }
-        }
-    }
-    var dblevel: String?{
-        didSet {
-            if let dblevel = dblevel{
-                level = dblevel
-            }
-        }
-    }
+    var dbtable: String = "dtb_n5"
+    var dblevel: String = "N5"
+    let lvls = [1,2,3,4,5]
+    var lvlArray : [LevelVO] = [LevelVO]()
 
     var manager : DBManager!
+    //var lvlmanager: LvlManager = LvlManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        manager = DBManager(table: table, level: level)
+        lvlArray = []
+        for lvl in lvls {
+            if lvl == 5 {
+                var vo = LevelVO(isSelected: true, table: "dtb_n\(lvl)", level: "N\(lvl)")
+                lvlArray.append(vo)
+            }else {
+                var vo = LevelVO(isSelected: false, table: "dtb_n\(lvl)", level: "N\(lvl)")
+                lvlArray.append(vo)
+            }
+            
+        }
+        manager = DBManager()
         results = []
-        fetchInitialResults()
+        fetchInitialResults(table: dbtable)
         tfSearch.delegate = self
         setUpTableView()
         navigationItem.backButtonTitle = ""
         navigationItem.hidesBackButton = true
-        self.title = "\(level)"
-        
+        self.title = dblevel
     }
     
     @IBAction func didTapSearch(_ sender: UIButton) {
         self.results = []
-        let data = manager.fetchResults(for: tfSearch.text!)
+        let data = manager.fetchResults(for: tfSearch.text!, table: dbtable)
         results.append(contentsOf: data)
         self.tvResults.reloadData()
         tfSearch.endEditing(true)
     }
     
-    func fetchInitialResults(){
+    func fetchInitialResults(table: String){
         results = []
-        let data = manager.fetchInitialResults()
+        let data = manager.fetchInitialResults(table: table)
         self.results.append(contentsOf: data)
         tvResults.reloadData()
+        
     }
     
     func setUpTableView(){
         tvResults.dataSource = self
         tvResults.delegate = self
         tvResults.register(UINib(nibName: String(describing: ResultTableViewCell.self), bundle: nil), forCellReuseIdentifier: "tvcresult")
+        
+        cvLevel.dataSource = self
+        cvLevel.delegate = self
+        cvLevel.register(UINib(nibName: String(describing: LevelCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: "cvclevel")
     }
     
     
-    @IBAction func onTapLvl(_ sender: Any) {
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: String(describing: LevelViewController.self)) as! LevelViewController
+  
+    
+    @IBAction func onTapSetting(_ sender: Any) {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: String(describing: SettingViewController.self)) as! SettingViewController
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func selectLevel(index: Int){
+        lvlArray = []
+        for lvl in lvls {
+            if lvl == index {
+                let vo = LevelVO(isSelected: true, table: "dtb_n\(lvl)", level: "N\(lvl)")
+                lvlArray.append(vo)
+            }else{
+                let vo = LevelVO(isSelected: false, table: "dtb_n\(lvl)", level: "N\(lvl)")
+                
+                lvlArray.append(vo)
+            }
+        }
+        self.title = "N\(index)"
+        self.dbtable = "dtb_n\(index)"
+        fetchInitialResults(table: dbtable)
+        cvLevel.reloadData()
     }
     
 }
@@ -86,17 +111,17 @@ extension ViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.results = []
-        let data = manager.fetchResults(for: tfSearch.text!)
+        let data = manager.fetchResults(for: tfSearch.text!, table: dbtable)
         self.results.append(contentsOf: data)
         self.tvResults.reloadData()
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
         self.results = []
-        let data = manager.fetchResults(for: tfSearch.text!)
+        let data = manager.fetchResults(for: tfSearch.text!, table: dbtable)
         self.results.append(contentsOf: data)
         if tfSearch.text! == "" {
-            fetchInitialResults()
+            fetchInitialResults(table: dbtable)
         }
         self.tvResults.reloadData()
     }
@@ -131,5 +156,27 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         tvResults.deselectRow(at: indexPath, animated: true)
     }
     
+}
+
+extension ViewController: UICollectionViewDataSource , UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cvclevel", for: indexPath) as! LevelCollectionViewCell
+        cell.vo = lvlArray[indexPath.row]
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width/5.8, height: collectionView.frame.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectLevel(index: indexPath.row+1)
+    }
 }
 

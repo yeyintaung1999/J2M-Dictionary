@@ -8,21 +8,13 @@
 import Foundation
 
 protocol DBProtocol{
-    func fetchResults(for key: String) -> [ResultVO]
-    func fetchInitialResults()->[ResultVO]
+    func fetchResults(for key: String, table: String) -> [ResultVO]
+    func fetchInitialResults(table: String)->[ResultVO]
 }
 
 class DBManager: DBProtocol{
     
-    var table: String = ""
-    var level: String = ""
-   
-    init(table: String, level: String){
-        self.table = table
-        self.level = level
-    }
-    
-    func fetchResults(for key: String) -> [ResultVO] {
+    func fetchResults(for key: String, table: String) -> [ResultVO] {
         var results: [ResultVO] = [ResultVO]()
         let query = "SELECT * FROM \(table) WHERE romaji LIKE '%\(key)%'"
         
@@ -40,7 +32,7 @@ class DBManager: DBProtocol{
         
     }
     
-    func fetchInitialResults() -> [ResultVO] {
+    func fetchInitialResults(table: String) -> [ResultVO] {
         var results: [ResultVO] = [ResultVO]()
         let query = "SELECT * FROM \(table)"
         

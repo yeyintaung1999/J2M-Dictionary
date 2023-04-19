@@ -7,6 +7,5 @@ target 'JE Dictionary' do
 
   # Pods for JE Dictionary
   pod 'SQLite.swift', '~> 0.14.0'
-  pod 'SideMenu'
-
+  
 end
