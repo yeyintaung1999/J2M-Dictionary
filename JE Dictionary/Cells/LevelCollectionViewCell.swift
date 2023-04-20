@@ -18,7 +18,8 @@ class LevelCollectionViewCell: UICollectionViewCell {
                 if vo.isSelected {
                     background.backgroundColor = .systemIndigo
                 }else{
-                    background.backgroundColor = .white
+                    background.backgroundColor = .systemBackground
+                    label.textColor = .label
                 }
             }
         }

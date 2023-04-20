@@ -22,21 +22,25 @@ class ViewController: UIViewController {
     var lvlArray : [LevelVO] = [LevelVO]()
 
     var manager : DBManager!
-    //var lvlmanager: LvlManager = LvlManager.shared
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setTextFieldPlaceholder()
         lvlArray = []
         for lvl in lvls {
             if lvl == 5 {
-                var vo = LevelVO(isSelected: true, table: "dtb_n\(lvl)", level: "N\(lvl)")
+                let vo = LevelVO(isSelected: true, table: "dtb_n\(lvl)", level: "N\(lvl)")
                 lvlArray.append(vo)
             }else {
-                var vo = LevelVO(isSelected: false, table: "dtb_n\(lvl)", level: "N\(lvl)")
+                let vo = LevelVO(isSelected: false, table: "dtb_n\(lvl)", level: "N\(lvl)")
                 lvlArray.append(vo)
             }
-            
         }
+        
         manager = DBManager()
         results = []
         fetchInitialResults(table: dbtable)
@@ -73,9 +77,6 @@ class ViewController: UIViewController {
         cvLevel.register(UINib(nibName: String(describing: LevelCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: "cvclevel")
     }
     
-    
-  
-    
     @IBAction func onTapSetting(_ sender: Any) {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: String(describing: SettingViewController.self)) as! SettingViewController
         navigationController?.pushViewController(vc, animated: true)
@@ -97,6 +98,19 @@ class ViewController: UIViewController {
         self.dbtable = "dtb_n\(index)"
         fetchInitialResults(table: dbtable)
         cvLevel.reloadData()
+    }
+    
+    func setTextFieldPlaceholder(){
+        switch getOption(){
+            case "kana":
+                tfSearch.placeholder = "Search with Hiragana/Katakana"
+            case "romaji":
+                tfSearch.placeholder = "Search with Romaji"
+            case "meaning_mm":
+                tfSearch.placeholder = "Search with Myanmar"
+            default:
+                tfSearch.placeholder = "Search"
+        }
     }
     
 }
@@ -127,7 +141,9 @@ extension ViewController: UITextFieldDelegate {
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         if tfSearch.text == nil || tfSearch.text == "" {
-            tfSearch.placeholder = "Type Something"
+            setTextFieldPlaceholder()
+            results = []
+            tvResults.reloadData()
             return false
         }else{
             return true
@@ -144,7 +160,16 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tvcresult", for: indexPath) as! ResultTableViewCell
-        cell.lbl.text = results[indexPath.row].kana
+        switch getOption() {
+            case "kana":
+                cell.lbl.text = results[indexPath.row].kana
+            case "romaji":
+                cell.lbl.text = results[indexPath.row].kana
+            case "meaning_mm":
+                cell.lbl.text = results[indexPath.row].meaning_mm
+            default:
+                cell.lbl.text = results[indexPath.row].kana
+        }
         return cell
     }
     
@@ -179,3 +204,7 @@ extension ViewController: UICollectionViewDataSource , UICollectionViewDelegate,
     }
 }
 
+func getOption()->String{
+    let option = UserDefaults.standard.string(forKey: "searchOption")
+    return option!
+}

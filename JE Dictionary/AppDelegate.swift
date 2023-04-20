@@ -15,6 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         let fileUrl = Bundle.main.url(forResource: "sqlite", withExtension: ".db")!
         database = try! Connection(fileUrl.path)
+        let option = UserDefaults.standard.string(forKey: "searchOption")
+        if option == nil || option!.isEmpty {
+            UserDefaults.standard.set("romaji", forKey: "searchOption")
+        }
         return true
     }
 

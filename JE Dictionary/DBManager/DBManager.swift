@@ -15,8 +15,9 @@ protocol DBProtocol{
 class DBManager: DBProtocol{
     
     func fetchResults(for key: String, table: String) -> [ResultVO] {
+        let option = getOption()
         var results: [ResultVO] = [ResultVO]()
-        let query = "SELECT * FROM \(table) WHERE romaji LIKE '%\(key)%'"
+        let query = "SELECT * FROM \(table) WHERE \(option) LIKE '%\(key)%'"
         
         for item in try! database.prepare(query){
             let vo = ResultVO(

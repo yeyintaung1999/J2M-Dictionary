@@ -19,6 +19,7 @@ class ResultDetailViewController: UIViewController {
         super.viewDidLoad()
 
         
+        
         lblkana.text = "\(vo?.kana ?? "default") \n \n(\(vo?.romaji ?? "default"))"
         if vo?.kanji == nil || vo?.kanji == "" {
             
@@ -28,4 +29,18 @@ class ResultDetailViewController: UIViewController {
         lblmeaning.text = vo?.meaning_mm ?? "default"
     }
 
+}
+
+extension ResultDetailViewController{
+    
+    func handleDarkMode() {
+        let isDark = UserDefaults.standard.bool(forKey: "switchState")
+        
+        if isDark {
+            overrideUserInterfaceStyle = .dark
+        }else{
+            overrideUserInterfaceStyle = .light
+        }
+    }
+    
 }

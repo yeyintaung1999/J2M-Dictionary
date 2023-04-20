@@ -17,6 +17,7 @@
 		671E493829EE48700099DC61 /* LevelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 671E493629EE48700099DC61 /* LevelTableViewCell.xib */; };
 		671E493B29EE6C3D0099DC61 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671E493A29EE6C3D0099DC61 /* DBManager.swift */; };
 		671E494129EE94750099DC61 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671E494029EE94750099DC61 /* SettingViewController.swift */; };
+		676751D229F119180077757E /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676751D129F119170077757E /* RadioButton.swift */; };
 		67BA609529E53016009A2D33 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BA609429E53016009A2D33 /* AppDelegate.swift */; };
 		67BA609729E53016009A2D33 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BA609629E53016009A2D33 /* SceneDelegate.swift */; };
 		67BA609929E53016009A2D33 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BA609829E53016009A2D33 /* ViewController.swift */; };
@@ -38,6 +39,7 @@
 		671E493629EE48700099DC61 /* LevelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LevelTableViewCell.xib; sourceTree = "<group>"; };
 		671E493A29EE6C3D0099DC61 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		671E494029EE94750099DC61 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		676751D129F119170077757E /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		67BA609129E53016009A2D33 /* JE Dictionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "JE Dictionary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		67BA609429E53016009A2D33 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67BA609629E53016009A2D33 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +114,24 @@
 			path = DBManager;
 			sourceTree = "<group>";
 		};
+		676751CF29F118F10077757E /* CustomUI */ = {
+			isa = PBXGroup;
+			children = (
+				676751D129F119170077757E /* RadioButton.swift */,
+			);
+			path = CustomUI;
+			sourceTree = "<group>";
+		};
+		676751D029F118F80077757E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				671E494029EE94750099DC61 /* SettingViewController.swift */,
+				671E492F29ED91AE0099DC61 /* ResultDetailViewController.swift */,
+				67BA609829E53016009A2D33 /* ViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		67BA608829E53016009A2D33 = {
 			isa = PBXGroup;
 			children = (
@@ -133,19 +153,18 @@
 		67BA609329E53016009A2D33 /* JE Dictionary */ = {
 			isa = PBXGroup;
 			children = (
+				676751D029F118F80077757E /* ViewControllers */,
+				676751CF29F118F10077757E /* CustomUI */,
 				671E493929EE6C300099DC61 /* DBManager */,
 				671E492A29ED8A0C0099DC61 /* Cells */,
 				671E492229E5D28C0099DC61 /* Model */,
 				671E491F29E5CEAF0099DC61 /* Database */,
 				67BA609429E53016009A2D33 /* AppDelegate.swift */,
 				67BA609629E53016009A2D33 /* SceneDelegate.swift */,
-				67BA609829E53016009A2D33 /* ViewController.swift */,
 				67BA609A29E53016009A2D33 /* Main.storyboard */,
 				67BA609D29E53018009A2D33 /* Assets.xcassets */,
 				67BA609F29E53018009A2D33 /* LaunchScreen.storyboard */,
 				67BA60A229E53018009A2D33 /* Info.plist */,
-				671E492F29ED91AE0099DC61 /* ResultDetailViewController.swift */,
-				671E494029EE94750099DC61 /* SettingViewController.swift */,
 			);
 			path = "JE Dictionary";
 			sourceTree = "<group>";
@@ -281,6 +300,7 @@
 				671E493029ED91AE0099DC61 /* ResultDetailViewController.swift in Sources */,
 				67BA609929E53016009A2D33 /* ViewController.swift in Sources */,
 				671E492929ED89B20099DC61 /* ResultVO.swift in Sources */,
+				676751D229F119180077757E /* RadioButton.swift in Sources */,
 				67DB32BE29EFA96900F935C8 /* LevelCollectionViewCell.swift in Sources */,
 				67BA609529E53016009A2D33 /* AppDelegate.swift in Sources */,
 				671E494129EE94750099DC61 /* SettingViewController.swift in Sources */,
