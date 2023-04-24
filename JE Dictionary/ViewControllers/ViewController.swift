@@ -8,19 +8,23 @@
 import UIKit
 import SQLite
 
+//MARK: - Unique Key for Notification Center Observers
+let romaji = "co.pcent.romaji"
+let kana = "co.pcent.kana"
+let mm = "co.pcent.mm"
+let kanji = "co.pcent.kanji"
+
 class ViewController: UIViewController {
-    
+    //MARK: - IB Outlets
     @IBOutlet weak var tfSearch: UITextField!
     @IBOutlet weak var tvResults: UITableView!
     @IBOutlet weak var cvLevel: UICollectionView!
     
     var results: [ResultVO] = []
-    
     var dbtable: String = "dtb_n5"
     var dblevel: String = "N5"
     let lvls = [1,2,3,4,5]
     var lvlArray : [LevelVO] = [LevelVO]()
-
     var manager : DBManager!
 
     override func viewWillAppear(_ animated: Bool) {
@@ -29,36 +33,37 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTextFieldPlaceholder()
-        lvlArray = []
-        for lvl in lvls {
-            if lvl == 5 {
-                let vo = LevelVO(isSelected: true, table: "dtb_n\(lvl)", level: "N\(lvl)")
-                lvlArray.append(vo)
-            }else {
-                let vo = LevelVO(isSelected: false, table: "dtb_n\(lvl)", level: "N\(lvl)")
-                lvlArray.append(vo)
-            }
-        }
-        
         manager = DBManager()
-        results = []
+        initializeLevel()
         fetchInitialResults(table: dbtable)
+        setTextFieldPlaceholder()
         tfSearch.delegate = self
         setUpTableView()
         navigationItem.backButtonTitle = ""
-        navigationItem.hidesBackButton = true
         self.title = dblevel
+        addObservers()
+        
     }
     
-    @IBAction func didTapSearch(_ sender: UIButton) {
-        self.results = []
-        let data = manager.fetchResults(for: tfSearch.text!, table: dbtable)
-        results.append(contentsOf: data)
-        self.tvResults.reloadData()
-        tfSearch.endEditing(true)
+    //MARK: - NotificationCenter Observers
+    func addObservers(){
+        let romajiname = Notification.Name(romaji)
+        let kananame = Notification.Name(kana)
+        let mmname = Notification.Name(mm)
+        let kanjiname = Notification.Name(kanji)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(observerFunc), name: romajiname, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(observerFunc), name: kananame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(observerFunc), name: mmname, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(observerFunc), name: kanjiname, object: nil)
     }
     
+    @objc func observerFunc(){
+        fetchInitialResults(table: dbtable)
+        setTextFieldPlaceholder()
+    }
+    
+    //MARK: - Fetch Results
     func fetchInitialResults(table: String){
         results = []
         let data = manager.fetchInitialResults(table: table)
@@ -67,6 +72,7 @@ class ViewController: UIViewController {
         
     }
     
+    //MARK: - Initialize UI
     func setUpTableView(){
         tvResults.dataSource = self
         tvResults.delegate = self
@@ -77,11 +83,20 @@ class ViewController: UIViewController {
         cvLevel.register(UINib(nibName: String(describing: LevelCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: "cvclevel")
     }
     
-    @IBAction func onTapSetting(_ sender: Any) {
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: String(describing: SettingViewController.self)) as! SettingViewController
-        navigationController?.pushViewController(vc, animated: true)
+    func initializeLevel(){
+        lvlArray = []
+        for lvl in lvls {
+            if lvl == 5 {
+                let vo = LevelVO(isSelected: true, table: "dtb_n\(lvl)", level: "N\(lvl)")
+                lvlArray.append(vo)
+            }else {
+                let vo = LevelVO(isSelected: false, table: "dtb_n\(lvl)", level: "N\(lvl)")
+                lvlArray.append(vo)
+            }
+        }
+
     }
-    
+    //Handle Level Selection
     func selectLevel(index: Int){
         lvlArray = []
         for lvl in lvls {
@@ -100,20 +115,23 @@ class ViewController: UIViewController {
         cvLevel.reloadData()
     }
     
-    func setTextFieldPlaceholder(){
-        switch getOption(){
-            case "kana":
-                tfSearch.placeholder = "Search with Hiragana/Katakana"
-            case "romaji":
-                tfSearch.placeholder = "Search with Romaji"
-            case "meaning_mm":
-                tfSearch.placeholder = "Search with Myanmar"
-            default:
-                tfSearch.placeholder = "Search"
-        }
+    //MARK: - IB Actions
+    //Setting Button Action
+    @IBAction func onTapSetting(_ sender: Any) {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: String(describing: SettingViewController.self)) as! SettingViewController
+        navigationController?.pushViewController(vc, animated: true)
     }
     
+    //Search Button Action
+    @IBAction func didTapSearch(_ sender: UIButton) {
+        self.results = []
+        let data = manager.fetchResults(for: tfSearch.text!, table: dbtable)
+        results.append(contentsOf: data)
+        self.tvResults.reloadData()
+        tfSearch.endEditing(true)
+    }
 }
+
 //MARK: - TEXTFIELD DELEGATE
 extension ViewController: UITextFieldDelegate {
     
@@ -149,7 +167,21 @@ extension ViewController: UITextFieldDelegate {
             return true
         }
     }
-    
+    //TextField Placeholder Change
+    func setTextFieldPlaceholder(){
+        switch getOption(){
+            case "kana":
+                tfSearch.placeholder = "Search with Hiragana/Katakana"
+            case "romaji":
+                tfSearch.placeholder = "Search with Romaji"
+            case "meaning_mm":
+                tfSearch.placeholder = "Search with Myanmar"
+            case "kanji":
+                tfSearch.placeholder = "Search with Kanji"
+            default:
+                tfSearch.placeholder = "Search"
+        }
+    }
 }
 
 //MARK: - TABLEVIEW DATASOURCE & DELEGATE
@@ -167,6 +199,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.lbl.text = results[indexPath.row].kana
             case "meaning_mm":
                 cell.lbl.text = results[indexPath.row].meaning_mm
+            case "kanji":
+                cell.lbl.text = results[indexPath.row].kanji
             default:
                 cell.lbl.text = results[indexPath.row].kana
         }
@@ -182,13 +216,13 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
 }
 
+//MARK: - Collection View Delegate and Datasourcec
 extension ViewController: UICollectionViewDataSource , UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 5
     }
 
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cvclevel", for: indexPath) as! LevelCollectionViewCell
         cell.vo = lvlArray[indexPath.row]

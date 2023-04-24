@@ -10,16 +10,15 @@ import UIKit
 class ResultDetailViewController: UIViewController {
     
     var vo : ResultVO?
-    @IBOutlet weak var lblkana: UILabel!
     
+    @IBOutlet weak var lblkana: UILabel!
     @IBOutlet weak var lblkanji: UILabel!
     @IBOutlet weak var lblmeaning: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
-        
+        //Binding Data
         lblkana.text = "\(vo?.kana ?? "default") \n \n(\(vo?.romaji ?? "default"))"
         if vo?.kanji == nil || vo?.kanji == "" {
             
@@ -29,18 +28,4 @@ class ResultDetailViewController: UIViewController {
         lblmeaning.text = vo?.meaning_mm ?? "default"
     }
 
-}
-
-extension ResultDetailViewController{
-    
-    func handleDarkMode() {
-        let isDark = UserDefaults.standard.bool(forKey: "switchState")
-        
-        if isDark {
-            overrideUserInterfaceStyle = .dark
-        }else{
-            overrideUserInterfaceStyle = .light
-        }
-    }
-    
 }

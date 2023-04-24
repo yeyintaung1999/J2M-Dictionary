@@ -13,7 +13,7 @@ protocol DBProtocol{
 }
 
 class DBManager: DBProtocol{
-    
+    //Results for Search with query
     func fetchResults(for key: String, table: String) -> [ResultVO] {
         let option = getOption()
         var results: [ResultVO] = [ResultVO]()
@@ -32,7 +32,7 @@ class DBManager: DBProtocol{
         return results
         
     }
-    
+    //Initial Data Results
     func fetchInitialResults(table: String) -> [ResultVO] {
         var results: [ResultVO] = [ResultVO]()
         let query = "SELECT * FROM \(table)"

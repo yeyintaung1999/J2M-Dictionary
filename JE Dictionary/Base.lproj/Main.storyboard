@@ -260,7 +260,7 @@
                                 <rect key="frame" x="0.0" y="79" width="393" height="739"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Rij-s7-1A0">
-                                        <rect key="frame" x="10" y="0.0" width="373" height="200"/>
+                                        <rect key="frame" x="10" y="0.0" width="373" height="250"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search options" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UVi-ra-wCy">
                                                 <rect key="frame" x="0.0" y="0.0" width="373" height="50"/>
@@ -276,8 +276,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="50" id="dR7-WM-1bh"/>
                                                         </constraints>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <connections>
                                                             <action selector="actionRomaji:" destination="Lpv-ND-5tw" eventType="touchUpInside" id="M8V-PH-lUG"/>
                                                         </connections>
@@ -298,8 +297,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="50" id="HDy-Gr-bo6"/>
                                                         </constraints>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <connections>
                                                             <action selector="actionKana:" destination="Lpv-ND-5tw" eventType="touchUpInside" id="LFT-H9-2gh"/>
                                                         </connections>
@@ -312,16 +310,39 @@
                                                     </label>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OLy-Mw-2ND">
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M0Z-XE-9de">
                                                 <rect key="frame" x="0.0" y="150" width="373" height="50"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Uo-IL-Lon" customClass="RadioButton" customModule="JE_Dictionary" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="50" id="W8p-Jk-j7A"/>
+                                                        </constraints>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal">
+                                                            <color key="titleColor" name="Lwhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="actionKanji:" destination="Lpv-ND-5tw" eventType="touchUpInside" id="MEt-Hf-rFV"/>
+                                                        </connections>
+                                                    </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kanji" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="96z-Z8-8Ti">
+                                                        <rect key="frame" x="50" y="0.0" width="323" height="50"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OLy-Mw-2ND">
+                                                <rect key="frame" x="0.0" y="200" width="373" height="50"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jvY-6t-aMy" customClass="RadioButton" customModule="JE_Dictionary" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="50" id="RQq-Uy-dMs"/>
                                                         </constraints>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <connections>
                                                             <action selector="actionMm:" destination="Lpv-ND-5tw" eventType="touchUpInside" id="7f8-AR-Nbl"/>
                                                         </connections>
@@ -336,7 +357,7 @@
                                             </stackView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="200" id="G2d-hr-Mjz"/>
+                                            <constraint firstAttribute="height" constant="250" id="G2d-hr-Mjz"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -359,6 +380,7 @@
                     </view>
                     <connections>
                         <outlet property="btnKana" destination="vZS-OW-SPl" id="dqw-ZP-Vfm"/>
+                        <outlet property="btnKanji" destination="8Uo-IL-Lon" id="mDX-9f-1x2"/>
                         <outlet property="btnMm" destination="jvY-6t-aMy" id="6dd-Fq-C2y"/>
                         <outlet property="btnRomaji" destination="xZS-ec-bcU" id="yOT-iF-V4H"/>
                     </connections>
@@ -406,6 +428,9 @@
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <namedColor name="B&amp;W">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </namedColor>
+        <namedColor name="Lwhite">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </namedColor>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -20,11 +20,9 @@ class RadioButton: UIButton {
     }
     
     func initButton(){
-        //self.translatesAutoresizingMaskIntoConstraints = false
         self.setTitle("", for: .normal)
         self.setTitle("", for: .highlighted)
         self.tintColor = .label
-        
         self.setImage(UIImage(systemName: "circle"),for: .normal)
         self.setImage(UIImage(systemName: "record.circle"), for: .highlighted)
         self.setImage(UIImage(systemName: "record.circle"), for: .selected)
